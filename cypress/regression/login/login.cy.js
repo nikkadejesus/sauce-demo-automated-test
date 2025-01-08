@@ -12,8 +12,17 @@ When('clicks logout', () => {
     cy.get('a#logout_sidebar_link').click();
 });
 
+When('user inputs invalid {string}', (credential) => {
+    cy.get(`#${credential}`).type('invalid');
+
+    const input = (credential === 'user-name') ? Cypress.env('password') : 'standard_user';
+    const target_field = (credential === 'user-name') ? '#password' : '#user-name';
+
+    cy.get(target_field).type(input);
+});
+
 Then('user should be able to see the error message {string}', (msg) => {
-    cy.get('h3[data-test="error"]').should('contain', 'Epic sadface: Sorry, this user has been locked out.')
+    cy.get('h3[data-test="error"]').should('contain', msg)
         .find('button[data-test="error-button"]').should('be.visible');
 
 });

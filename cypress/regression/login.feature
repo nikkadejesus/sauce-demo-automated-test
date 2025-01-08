@@ -20,3 +20,13 @@ Feature: User can login/logout on the Sauce demo site
         And clicks the hamburger menu
         And clicks logout
         Then user should be redirected to the login page
+
+    Scenario: User cannot login using invalid '<credential>'
+        When user inputs invalid '<credential>'
+        And clicks the login button
+        Then user should be able to see the error message "Epic sadface: Username and password do not match any user in this service"
+
+        Examples:
+            | credential |
+            | user-name  |
+            | password   |
