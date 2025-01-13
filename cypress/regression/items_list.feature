@@ -23,3 +23,33 @@ Feature: User can sort the list of items
             | order         |
             | Name (A to Z) |
             | Name (Z to A) |
+
+    Scenario: User can add an item to the cart
+        And user adds the '<item>' to cart
+        And clicks the cart icon
+        Then user should see the '<item>' in cart
+
+        Examples:
+            | item                              |
+            | Sauce Labs Backpack               |
+            | Sauce Labs Bike Light             |
+            | Sauce Labs Bolt T-Shirt           |
+            | Sauce Labs Fleece Jacket          |
+            | Sauce Labs Onesie                 |
+            | Test.allTheThings() T-Shirt (Red) |
+
+    Scenario: User can remove a product from the cart
+        And user adds the '<item>' to cart
+        And clicks the cart icon
+        And sees the '<item>' in cart
+        And removes the '<item>'
+        Then user should see the '<item>' has been removed from cart
+
+        Examples:
+            | item                              |
+            | Sauce Labs Backpack               |
+            | Sauce Labs Bike Light             |
+            | Sauce Labs Bolt T-Shirt           |
+            | Sauce Labs Fleece Jacket          |
+            | Sauce Labs Onesie                 |
+            | Test.allTheThings() T-Shirt (Red) |
